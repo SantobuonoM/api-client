@@ -9,11 +9,11 @@ const Controller = require('./Controller');
 
 // agrego controlador para acceder a su funcionalidades//   
 
-router.get('/:clientId', [cors()], Controller.getOneClient);
-router.get('/:all', [cors()], Controller.getAllClients);
-router.post('/:', [cors()], Controller.createClients);
+router.get('/one/:clienteId', [cors()], Controller.getOneClient);
+router.get('/all', [cors()], Controller.getAllClients);
+router.post('/', [cors()], Controller.createClients);
 router.delete('/:clienteId', [cors()], Controller.deleteOneClient);
-router.put('/:clienetId', [cors()], Controller.updateOneClient);
+router.put('/:clienteId', [cors()], Controller.updateOneClient);
 
 
 

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 
-let cuentaSchema = new Schema({
+let clienteSchema = new Schema({
     nombre: {
         type: String,
         required: [true, 'El nombre es necesario']
@@ -31,4 +31,4 @@ let cuentaSchema = new Schema({
 
 
 
-module.exports = mongoose.model('Cuentas', cuentaSchema);
+module.exports = mongoose.model('Clientes', clienteSchema);

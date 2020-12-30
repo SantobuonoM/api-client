@@ -7,11 +7,11 @@ const app = express()
 
 
 const bodyParser = require('body-parser')
-const accountRouter = require('./Clientes/Router');
+const clientRouter = require('./Components/Clientes/Router');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/cuentas', accountRouter);
+app.use('/clientes', clientRouter);
 
 
 
