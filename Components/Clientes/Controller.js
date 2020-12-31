@@ -34,7 +34,11 @@ exports.getOneClient = async function(req, res) {
 
 exports.updateOneClient = async function(req, res) {
     const id = req.params.clienteId;
-    return res.send('Actualizo la cuenta ' + id);
+
+    const update = await Clientes.updateOne({ clientid: id }, // Query parameter
+        req.body, { upsert: true } // Options
+    )
+    return res.send('updated');
 }
 
 
