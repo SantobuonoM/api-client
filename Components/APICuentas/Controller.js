@@ -1,4 +1,4 @@
-const Service = require('Service')
+const Service = require('./Service')
 
 exports.getCuentasPorClienteId = async(id) => {
 

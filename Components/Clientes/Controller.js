@@ -1,5 +1,5 @@
 const Clientes = require('./model');
-
+const APICuentas = require('./../APICuentas/Controller')
 exports.getAllClients = async function(req, res) {
 
 
@@ -15,13 +15,23 @@ exports.getAllClients = async function(req, res) {
 
 exports.getOneClient = async function(req, res) {
 
+
+
     const id = req.params.clienteId;
+
+
 
     try {
         const one = await Clientes.findOne({
             clientid: id
         });
-        return res.send(one);
+
+        const cuentas = await APICuentas.getCuentasPorClienteId(id);
+
+        return res.send({
+            cliente: one,
+            cuentas
+        });
 
     } catch (error) {
         return res.send(error)
@@ -36,9 +46,9 @@ exports.updateOneClient = async function(req, res) {
     const id = req.params.clienteId;
 
     const update = await Clientes.updateOne({ clientid: id }, // Query parameter
-        req.body, { upsert: true } // Options
+        req.body, { upsert: false } // Options
     )
-    return res.send('updated');
+    return res.send(update);
 }
 
 
