@@ -16,6 +16,6 @@ exports.getCuentasPorClienteId = async (clienteId) => {
             }
         }
     );
-    return Cuentas;
+    return await Cuentas.json();
 
 };
