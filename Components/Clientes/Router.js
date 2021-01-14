@@ -12,6 +12,7 @@ const Controller = require('./Controller');
 router.get('/one/:clienteId', [cors()], Controller.getOneClient);
 router.get('/all', [cors()], Controller.getAllClients);
 router.post('/', [cors()], Controller.createClients);
+router.post('/login', [cors()], Controller.loginClients);
 router.delete('/:clienteId', [cors()], Controller.deleteOneClient);
 router.put('/:clienteId', [cors()], Controller.updateOneClient);
 

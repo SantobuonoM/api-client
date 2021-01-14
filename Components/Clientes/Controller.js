@@ -1,5 +1,39 @@
 const Clientes = require('./model');
 const APICuentas = require('./../APICuentas/Controller')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+exports.loginClients = async function(req, res) {
+
+    try {
+        const cliente = await Clientes.findOne({
+            email: req.body.email
+        });
+
+
+        const login = bcrypt.compareSync(req.body.password, cliente.password); // true
+        if (!login) throw new Error('Email o password incorrectos')
+        const token = jwt.sign({
+                id: cliente._id,
+                nombre: cliente.nombre,
+                email: cliente.email
+            },
+            'seed', { expiresIn: 60 * 60 * 24 });
+
+        return res.json({
+            ok: true,
+            cliente: {
+                id: cliente._id,
+                nombre: cliente.nombre,
+                email: cliente.email
+            },
+            token
+        })
+    } catch (error) {
+        return res.send(error)
+    };
+
+
+}
 exports.getAllClients = async function(req, res) {
 
 
@@ -69,13 +103,11 @@ exports.deleteOneClient = async function(req, res) {
 }
 
 exports.createClients = async function(req, res) {
-    const { nombre, email, password, estado, clientid } = req.body
+    const { nombre, email, password } = req.body
     const clienteNuevo = new Clientes({
         nombre,
         email,
-        password,
-        estado,
-        clientid
+        password: bcrypt.hashSync(password, 10)
     });
     let result;
 
@@ -97,12 +129,12 @@ exports.addClients = async function(req, res) {
 
     //obtengo el params.body
 
-    const { nombre, email, password, estado, clientid } = req.body
+    const { nombre, email, password } = req.body
 
     //creamos un objeto = cuenta CON NEW//
 
 
-    const nuevoCliente = new Cliente({ nombre, email, password, estado, clientid })
+    const nuevoCliente = new Cliente({ nombre, email, password })
 
 
     let result;

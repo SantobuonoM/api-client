@@ -17,17 +17,11 @@ let clienteSchema = new Schema({
         type: String,
         required: [true, 'La contraseña es obligatoria']
 
-    },
-    estado: {
-        type: Boolean,
-        default: true
-    },
-    clientid: {
-        type: String,
-        required: [true, 'El id del cliente es necesario']
-
     }
+
 });
+
+const bcrypt = require('bcrypt');
 
 
 
