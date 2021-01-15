@@ -4,7 +4,7 @@ const dotenv = require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
-
+const path = require('path')
 
 
 
@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/clientes', clientRouter);
 app.use('/usuarios', userRouter);
-
+app.use(express.static(path.resolve(__dirname + './public')))
 
 
 

@@ -17,7 +17,7 @@ exports.loginClients = async function(req, res) {
                 nombre: cliente.nombre,
                 email: cliente.email
             },
-            'seed', { expiresIn: 60 * 60 * 24 });
+            process.env.SEED, { expiresIn: 60 * 60 * 24 });
 
         return res.json({
             ok: true,
